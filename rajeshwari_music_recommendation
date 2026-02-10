@@ -1,0 +1,77 @@
+Content-Based Music Recommendation System
+
+Project Overview:
+    This project implements a Content-Based Music Recommendation System using Machine Learning techniques in Python.
+    The system recommends similar songs based on their audio features such as tempo, energy, danceability, loudness, and more.
+
+Objectives:
+    Recommend songs similar to a given input song
+    Use content-based filtering
+    Apply cosine similarity to measure similarity between songs
+    Build a simple and explainable ML project suitable for academic use
+
+Recommendation Technique Used:
+    Content-Based Filtering
+    Each song is represented as a feature vector
+    Similarity between songs is calculated using Cosine Similarity
+    Songs with higher similarity scores are recommended
+
+Technologies Used:
+    Programming Language:
+        Python
+    Libraries:
+        Pandas
+        NumPy
+        Scikit-learn
+    Algorithm:
+        Cosine Similarity
+        StandardScaler
+
+Dataset Used:
+    Dataset Name: spotify_tracks.csv (Download from Kaggle)
+    Sample Features Used: (danceability,energy,loudness,tempo,speechiness,acousticness,instrumentalness,valence etc..)
+
+System Workflow:
+    1.Load the dataset
+    2.Filter songs by language (Tamil)
+    3.Select relevant audio features
+    4.Normalize features using StandardScaler
+    5.Compute similarity using cosine_similarity
+    6.Recommend top N similar songs
+
+Project Architecture:
+User Song Input
+      ↓
+Preprocessing
+      ↓
+Feature Engineering
+      ↓
+Similarity Model (Cosine.)
+      ↓
+Top-N Tamil Song Recommendations
+
+Algorithm Steps:
+    * Convert songs into numerical feature vectors
+    * Scale features to bring them to the same range
+    * Calculate cosine similarity between songs
+    * Sort similarity scores in descending order
+    * Recommend the most similar songs
+
+Cosine Similarity Score:
+    Cosine similarity is the primary evaluation metric used in this project.
+    Formula:
+        Cosine Similarity = (A · B) / (||A|| × ||B||)
+    Where:
+        A and B are feature vectors of two songs
+        The output ranges from 0 to 1
+    Interpretation:
+        Value close to 1 → Songs are very similar
+        Value close to 0 → Songs are dissimilar
+    Higher cosine similarity indicates better recommendation accuracy.
+
+Future Enhancements:
+    Add Collaborative Filtering
+    Build a Hybrid Recommendation System
+    Create a Web Application using Flask/Streamlit
+    Add user login and playlists
+
