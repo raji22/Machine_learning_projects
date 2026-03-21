@@ -1,0 +1,42 @@
+Linear Regression Project
+This repository contains a simple implementation of Linear Regression using Python. The project demonstrates how to build a predictive model using a dataset (score_updated.csv) and evaluate its performance.
+
+Dataset:
+The dataset used in this project is:(score_updated.csv)
+It typically contains data related to input features (e.g., study hours) and output labels (e.g., scores).
+
+Objective:
+The goal of this project is to:
+    Understand how Linear Regression works
+    Train a model using real data
+    Predict output values based on input features
+    Evaluate model performance
+
+Technologies Used:
+Python 
+NumPy
+Pandas
+Matplotlib
+Scikit-learn
+
+Project Workflow:
+1.Import required libraries
+2.Load the dataset
+3.Perform data preprocessing
+4.Split dataset into training and testing sets
+5.Train the Linear Regression model
+6.Make predictions
+7.Evaluate the model
+8.Visualize results
+  
+Results:
+The model was successfully trained using Linear Regression
+Achieved an R² score of 0.97 (97%) on test data
+Indicates a strong relationship between study hours and scores
+
+                           Model Performance
+Algorithm: Linear Regression
+Evaluation Metric: R² Score
+Score: 0.97
+
+👉 This means the model explains 97% of the variance in the target variable.
