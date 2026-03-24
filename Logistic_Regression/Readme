@@ -1,0 +1,67 @@
+Weather Forecast Prediction using Logistic Regression
+
+This project focuses on predicting whether it will rain or not based on weather conditions using a Machine Learning classification model (Logistic Regression).
+
+*Dataset Overview:
+The dataset contains weather-related features such as:
+Temperature
+Humidity
+Wind Speed
+Cloud Cover
+Pressure
+Rain (Target Variable: Yes/No)
+
+*Project Workflow:
+1.Data Loading & Exploration
+    Loaded dataset using Pandas
+    Checked:
+        Shape of data
+        Data types and structure
+        Statistical summary
+    Identified:
+        Missing values
+        Duplicate records
+2.Data Preprocessing
+    Converted categorical target variable Rain (Yes/No) into numerical format (0/1) using Label Encoding
+    Verified data cleanliness
+3.Exploratory Data Analysis (EDA)
+      Scatter Plot → Temperature vs Rain
+      Correlation Heatmap → Relationship between features
+      Histogram → Distribution of Temperature
+    This helps understand:
+        Feature relationships
+        Data patterns
+        Impact of variables on rainfall
+4.Feature Selection
+      Selected input features: Temperature, Humidity, Wind_Speed, Cloud_Cover, Pressure
+      Target variable: Rain (0 = No, 1 = Yes)
+5.Train-Test Split
+      Split data into:
+        70% Training
+        30% Testing
+        Used random_state=42 for reproducibility
+6.Feature Scaling
+      Applied StandardScaler to normalize data
+      Important for Logistic Regression performance
+7.Model Building
+        Used Logistic Regression for binary classification
+        Trained model on scaled training data
+8.Model Evaluation
+        Evaluated model using:
+              Accuracy Score
+              Confusion Matrix
+              Classification Report
+        These metrics help measure:
+                    Prediction correctness
+                    False positives & negatives
+                    Precision, Recall, F1-score
+*Results:
+Model predicts whether it will rain based on weather conditions
+Achieved good classification performance (Accuracy: 0.9266666666666666)
+*Technologies Used:
+      Python
+      Pandas
+      Matplotlib & Seaborn
+      Scikit-learn
+*Conclusion:
+This project demonstrates how machine learning can be used for weather prediction by analyzing environmental factors and building a classification model.
