@@ -1,0 +1,39 @@
+Time Series Forecast Project - Sales Forecasting using ARIMA
+Overview:
+This project focuses on time series analysis and forecasting of sales data using the ARIMA model.
+The goal is to analyze historical sales trends and predict future sales values.
+
+Technologies Used:
+Python
+Pandas
+Matplotlib
+Statsmodels (ARIMA)
+Scikit-learn
+
+Dataset:
+File: train.csv
+Contains sales transaction data with Order Date and Sales
+
+Project Workflow:
+  Data Loading & Exploration
+      Loaded dataset using Pandas
+      Checked structure using .head() and .info()
+  Data Preprocessing
+      Converted Order Date to datetime format
+      Sorted data chronologically
+      Checked for duplicate values
+  Time Series Transformation
+      Aggregated daily sales
+      Converted data into monthly sales trends
+  Data Visualization
+      Plotted monthly sales trend using Matplotlib
+  Model Building (ARIMA)
+      Split data into train and test sets
+      Applied ARIMA model (1,1,1)
+      Forecasted future sales
+  Model Evaluation
+      Evaluated using Mean Absolute Error (MAE)
+
+Results:
+    Successfully forecasted sales for the next 6 months
+    Model performance evaluated using MAE
