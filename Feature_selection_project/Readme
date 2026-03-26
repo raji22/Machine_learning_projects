@@ -1,0 +1,39 @@
+Student Placement Prediction using Machine Learning
+Overview:
+This project predicts whether a student will be placed or not based on academic performance and other factors. 
+It uses Logistic Regression and ANOVA feature selection to improve model performance and interpretability.
+
+Dataset:
+Contains student academic details like SSC, HSC, degree percentage, specialization, etc.
+Target variable: Placement Status (Placed / Not Placed)
+
+Features:
+Data preprocessing and cleaning
+Label Encoding for categorical variables
+ANOVA (F-test) feature selection
+Logistic Regression model
+Model evaluation using accuracy, precision, recall, and F1-score
+
+Machine Learning Workflow:
+Data Loading
+Data Preprocessing
+Feature Selection (ANOVA)
+Model Training (Logistic Regression)
+Model Evaluation
+Performance Comparison
+
+Results:
+Accuracy with feature selection: 76%
+Accuracy without feature selection: 88%
+Feature selection helped in reducing dimensionality and improving interpretability.
+
+Key Insights:
+Academic scores like SSC, HSC,Degree are strong predictors
+Feature selection does not always improve accuracy but helps simplify the model
+Logistic Regression performs well for binary classification problems
+
+Tech Stack:
+Python
+Pandas, NumPy
+Scikit-learn
+Matplotlib, Seaborn
