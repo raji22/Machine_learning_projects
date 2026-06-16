@@ -1,0 +1,68 @@
+World Top Restaurants Data Analysis
+Project Overview
+
+This project performs Exploratory Data Analysis (EDA) on a dataset containing information about top restaurants around the world. The analysis focuses on restaurant ratings, Michelin stars, pricing, cuisine types, seating capacity, years of operation, and geographical distribution.
+
+The goal is to uncover patterns and insights that help understand the characteristics of highly rated restaurants globally.
+
+Dataset Features
+
+The dataset includes the following attributes:
+
+Restaurant Name
+Country
+Continent
+Cuisine Type
+Michelin Stars
+Average Price (USD)
+Rating
+Seating Capacity
+Years Operating
+Established Year
+Price Category
+
+Technologies Used
+Python
+Pandas
+Matplotlib
+Seaborn
+
+Analysis Performed
+1. Data Loading & Exploration
+Loaded dataset using Pandas.
+Inspected dataset structure and columns.
+Checked unique countries represented.
+2. Country-wise Price Analysis
+Visualized average restaurant prices across countries using bar charts.
+3. Cuisine Type Analysis
+Compared average prices among different cuisine types.
+4. Michelin Star Distribution
+Counted restaurants based on Michelin star ratings.
+5. Restaurant Rating Distribution
+Created histogram and KDE plots to understand rating distribution.
+6. Price Category Analysis
+Used boxplots to examine:
+Average Price by Price Category
+Rating by Price Category
+7. Continental Distribution
+Analyzed the number of restaurants across continents.
+8. Average Price Distribution
+Studied the spread of restaurant prices using histograms.
+9. Correlation Analysis
+Examined relationships among:
+Rating
+Average Price
+Seating Capacity
+Michelin Stars
+Years Operating
+Established Year
+10. Correlation Heatmap
+Visualized feature relationships using a heatmap.
+Visualizations Included
+Bar Charts
+Histograms
+KDE Plots
+Count Plots
+Box Plots
+Correlation Matrix
+Heatmap
