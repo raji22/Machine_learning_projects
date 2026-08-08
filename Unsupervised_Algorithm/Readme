@@ -1,0 +1,428 @@
+Customer Segmentation using K-Means Clustering
+
+#Project Overview
+
+This project performs **Customer Segmentation** using the **K-Means Clustering** algorithm.
+The goal is to group customers into different segments based on their:
+* Age
+* Annual Income
+* Spending Score
+Customer segmentation helps businesses understand different customer groups and develop targeted marketing strategies.
+
+#Objective
+The main objectives of this project are:
+* Explore and understand customer data
+* Perform data preprocessing
+* Encode categorical variables
+* Analyze customer characteristics using visualization
+* Scale numerical features using StandardScaler
+* Determine the optimal number of clusters using the **Elbow Method**
+* Apply **K-Means Clustering**
+* Evaluate clustering performance using **Silhouette Score**
+* Visualize customer clusters using **t-SNE**
+
+#Dataset
+The project uses the **Mall Customers Dataset**.
+
+### Dataset Features
+| Feature                | Description                                        |
+| ---------------------- | -------------------------------------------------- |
+| CustomerID             | Unique identifier for each customer                |
+| Gender                 | Customer gender                                    |
+| Age                    | Age of the customer                                |
+| Annual Income (k$)     | Annual income in thousands of dollars              |
+| Spending Score (1-100) | Score assigned based on customer spending behavior |
+
+## 🛠️ Technologies & Libraries
+* Python
+* Pandas
+* Matplotlib
+* Seaborn
+* Scikit-learn
+* Jupyter Notebook
+
+### Machine Learning Techniques
+* Label Encoding
+* Feature Scaling
+* K-Means Clustering
+* Elbow Method
+* Silhouette Score
+* t-SNE Dimensionality Reduction
+
+#Project Workflow
+text
+Load Dataset
+      ↓
+Data Exploration
+      ↓
+Check Missing Values & Duplicates
+      ↓
+Encode Categorical Features
+      ↓
+Exploratory Data Visualization
+      ↓
+Select Features
+      ↓
+Standardize Features
+      ↓
+Find Optimal K using Elbow Method
+      ↓
+Apply K-Means Clustering
+      ↓
+Evaluate using Silhouette Score
+      ↓
+Visualize Clusters using t-SNE
+
+#Import Libraries
+The project starts by importing the required Python libraries.
+python
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import LabelEncoder
+from sklearn.cluster import KMeans
+from sklearn.manifold import TSNE
+from sklearn.metrics import silhouette_score
+
+Purpose
+* **Pandas** → Data manipulation
+* **Matplotlib** → Visualization
+* **Seaborn** → Statistical visualization
+* **StandardScaler** → Feature scaling
+* **LabelEncoder** → Convert categorical values into numerical values
+* **KMeans** → Customer clustering
+* **TSNE** → 2D visualization of high-dimensional data
+* **Silhouette Score** → Evaluate clustering quality
+
+#Load Dataset
+python
+cust_segment = pd.read_csv("Mall_Customers.csv")
+print(cust_segment.head())
+The dataset is loaded using Pandas.
+`head()` displays the first five rows to understand the structure of the data.
+
+#Data Exploration
+python
+print(cust_segment.describe())
+print(cust_segment.info())
+
+#describe()
+Provides statistical information such as:
+* Count
+* Mean
+* Standard deviation
+* Minimum
+* Maximum
+* Quartiles
+
+info()
+Provides:
+* Number of rows
+* Number of columns
+* Data types
+* Non-null values
+
+# Check Missing Values and Duplicates
+python
+print(cust_segment.isnull().sum())
+print(cust_segment.shape)
+print(cust_segment.duplicated().sum())
+
+#isnull().sum()
+Checks whether the dataset contains missing values.
+
+shape
+Returns:
+(number of rows, number of columns)
+
+duplicated().sum()
+Checks whether duplicate records exist.
+
+#Encoding Categorical Data
+The `Gender` column contains categorical values such as:
+Male
+Female
+K-Means works with numerical values, so the categorical column is encoded.
+
+python
+le = LabelEncoder()
+
+cust_segment["Gender"] = le.fit_transform(
+    cust_segment["Gender"]
+)
+
+For example:
+Female → 0
+Male   → 1
+
+#Data Visualization
+### Pair Plot
+python
+sns.pairplot(cust_segment)
+plt.show()
+A pair plot helps understand relationships between numerical features.
+It can help identify:
+* Relationships
+* Distributions
+* Possible patterns
+* Potential clusters
+
+Income vs Spending Score
+python
+plt.scatter(
+    x="Annual Income (k$)",
+    y="Spending Score (1-100)",
+    data=cust_segment
+)
+plt.show()
+This visualization helps observe the relationship between:
+**Annual Income ↔ Spending Score**
+
+#Feature Selection
+The features used for clustering are:
+python
+X = cust_segment[
+    ['Age',
+     'Annual Income (k$)',
+     'Spending Score (1-100)']
+]
+These three features are selected because they provide useful information about customer behavior.
+
+#Feature Scaling
+python
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+### Why StandardScaler?
+The features have different ranges.
+For example:
+Age                  → around 18–70
+Annual Income        → around 15–137
+Spending Score       → 1–100
+If scaling is not performed, features with larger numerical ranges can have more influence on distance calculations.
+K-Means uses distance to form clusters, so scaling is important.
+After StandardScaler:
+Mean ≈ 0
+Standard Deviation ≈ 1
+
+#Finding Optimal Number of Clusters
+To determine the appropriate number of clusters, the **Elbow Method** is used.
+python
+wcss = []
+for i in range(1, 11):
+    kmeans = KMeans(
+        n_clusters=i,
+        random_state=42
+    )
+    kmeans.fit(X_scaled)
+    wcss.append(kmeans.inertia_)
+### What is WCSS?
+WCSS stands for:
+**Within-Cluster Sum of Squares**
+It measures how close the data points are to their cluster centroid.
+Lower WCSS generally means the points are closer to their cluster centers.
+However, simply minimizing WCSS is not enough because WCSS decreases as the number of clusters increases.
+Therefore, we look for the **Elbow Point**.
+
+#Elbow Method Visualization
+```python
+plt.figure(figsize=(7,5))
+plt.plot(
+    range(1,11),
+    wcss,
+    marker='o'
+)
+plt.title("Elbow Method")
+plt.xlabel("Number of Clusters")
+plt.ylabel("WCSS")
+plt.show()
+The point where the WCSS curve starts decreasing more slowly is called the **Elbow Point**.
+In this project, the selected number of clusters is:
+K = 5
+
+#Apply K-Means Clustering
+python
+kmeans = KMeans(
+    n_clusters=5,
+    random_state=42
+)
+clusters = kmeans.fit_predict(X_scaled)
+
+K-Means divides customers into **5 different groups**.
+Each customer receives a cluster label.
+For example:
+Customer 1 → Cluster 2
+Customer 2 → Cluster 0
+Customer 3 → Cluster 4
+Customer 4 → Cluster 1
+
+#Add Cluster Labels
+python
+cust_segment['Cluster'] = clusters
+A new column called `Cluster` is added to the dataset.
+Age | Income | Spending Score | Cluster
+----------------------------------------
+25  | 40     | 70             | 2
+32  | 80     | 20             | 1
+
+To check the cluster labels:
+python
+print(cust_segment['Cluster'].unique())
+
+#Evaluate Clustering using Silhouette Score
+python
+score = silhouette_score(
+    X_scaled,
+    clusters
+)
+print("Silhouette Score:", score)
+
+### What is Silhouette Score?
+Silhouette Score measures how well each data point fits within its assigned cluster compared with other clusters.
+The score generally ranges from:
+-1 to +1
+
+### Interpretation
+| Score       | Meaning                       |
+| ----------- | ----------------------------- |
+| Close to +1 | Very good clustering          |
+| Around 0    | Overlapping clusters          |
+| Negative    | Possible incorrect clustering |
+
+A higher Silhouette Score generally indicates better-defined clusters.
+
+#t-SNE Visualization
+python
+tsne = TSNE(
+    n_components=2,
+    random_state=42
+)
+X_tsne = tsne.fit_transform(X_scaled)
+
+### What is t-SNE?
+
+**t-SNE = t-distributed Stochastic Neighbor Embedding**
+It is a dimensionality-reduction technique mainly useful for visualizing high-dimensional data in 2D or 3D.
+Here:
+3 Features
+    ↓
+t-SNE
+    ↓
+2 Dimensions
+    ↓
+TSNE1 + TSNE2
+
+##Add t-SNE Coordinates
+python
+cust_segment['TSNE1'] = X_tsne[:,0]
+cust_segment['TSNE2'] = X_tsne[:,1]
+Two new columns are created:
+TSNE1
+TSNE2
+These coordinates are used for visualization.
+
+#Final Cluster Visualization
+python
+plt.figure(figsize=(8,6))
+sns.scatterplot(
+    x='TSNE1',
+    y='TSNE2',
+    hue='Cluster',
+    palette='Set1',
+    data=cust_segment
+)
+
+plt.title(
+    "Customer Segmentation using KMeans + t-SNE"
+)
+
+plt.show()
+
+The final visualization shows customers in different clusters.
+
+Each color represents a different customer segment.
+
+#Business Interpretation
+The resulting clusters can be analyzed to understand different types of customers.
+For example, depending on the actual cluster characteristics, segments may represent:
+
+### 🟢 High Income + High Spending
+Potentially valuable customers.
+**Business strategy:**
+* Premium offers
+* Loyalty programs
+* Exclusive products
+
+### 🔵 High Income + Low Spending
+Customers with purchasing potential but relatively low spending.
+**Business strategy:**
+* Personalized promotions
+* Targeted discounts
+* Product recommendations
+
+### 🟡 Low Income + High Spending
+Customers who spend a relatively high proportion of their available income.
+**Business strategy:**
+* Affordable premium products
+* Loyalty offers
+* Personalized campaigns
+
+### 🔴 Low Income + Low Spending
+Customers with relatively low spending behavior.
+**Business strategy:**
+* Budget products
+* Discounts
+* Value-based offers
+
+> Note: The exact business interpretation should be based on the actual cluster-wise averages rather than cluster numbers alone.
+
+#Key Concepts Demonstrated
+
+This project demonstrates practical knowledge of:
+
+* Exploratory Data Analysis (EDA)
+* Data Preprocessing
+* Categorical Encoding
+* Feature Scaling
+* Unsupervised Machine Learning
+* K-Means Clustering
+* Elbow Method
+* WCSS
+* Silhouette Score
+* Dimensionality Reduction
+* t-SNE
+* Data Visualization
+* Customer Segmentation
+
+#Future Improvements
+Possible improvements for this project:
+* Compare K-Means with DBSCAN and Hierarchical Clustering
+* Analyze cluster-wise average Age, Income and Spending Score
+* Create customer personas
+* Build an interactive Power BI dashboard
+* Perform PCA before visualization
+* Compare PCA and t-SNE visualizations
+* Use additional customer behavioral features
+* Automate cluster profiling
+
+#Conclusion
+This project demonstrates how **K-Means Clustering** can be used to segment customers based on demographic and spending behavior.
+By identifying different customer groups, businesses can develop more targeted:
+* Marketing campaigns
+* Customer retention strategies
+* Personalized offers
+* Product recommendations
+* Loyalty programs
+This project provides practical experience in applying **Unsupervised Machine Learning** to a real-world business problem.
+
+## 👩‍💻 Author
+
+**Rajeshwari B**
+
+Aspiring Data Scientist | Python | SQL | Machine Learning | Power BI
+
+### 🔗 GitHub
+
+`https://github.com/raji22/Machine_learning_projects`
